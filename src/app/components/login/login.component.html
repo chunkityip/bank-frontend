@@ -1,0 +1,10 @@
+<mat-card>
+  <form (ngSubmit)="login()">
+    <mat-form-field appearance="fill">
+      <mat-label>Customer ID</mat-label>
+      <input matInput [(ngModel)]="customerId" name="customerId" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Login</button>
+  </form>
+</mat-card>
+

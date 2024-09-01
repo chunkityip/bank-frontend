@@ -1,0 +1,18 @@
+<mat-card>
+  <form (ngSubmit)="processTransaction()">
+    <mat-form-field appearance="fill">
+      <mat-label>From Account</mat-label>
+      <input matInput [(ngModel)]="fromAccount" name="fromAccount" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>To Account</mat-label>
+      <input matInput [(ngModel)]="toAccount" name="toAccount" required>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Amount</mat-label>
+      <input matInput type="number" [(ngModel)]="amount" name="amount" required>
+    </mat-form-field>
+    <button mat-raised-button color="primary" type="submit">Process Transaction</button>
+  </form>
+</mat-card>
+
