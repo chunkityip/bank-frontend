@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { CustomerDTO } from '../models/customer-dto';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CustomerService {
-  private baseUrl = 'http://localhost:9091/customer';
+  private apiUrl = 'http://localhost:9091'; // Base URL of your backend
 
   constructor(private http: HttpClient) {}
 
-  registerCustomer(name: string): Observable<CustomerDTO> {
-    return this.http.post<CustomerDTO>(`${this.baseUrl}`, name);
+  // Register a new customer with a provided name
+  registerCustomer(name: string): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/customer`, name, {
+      headers: { 'Content-Type': 'application/json' }
+    });
   }
 
-  getCustomerInfo(): Observable<CustomerDTO> {
-    const customerId = localStorage.getItem('customerId');
-    return this.http.get<CustomerDTO>(`${this.baseUrl}/${customerId}`);
+  // Login by retrieving customer details with customer ID
+  loginCustomer(customerId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/customer/${customerId}`);
+  }
+
+  // Get all bank accounts associated with the customer ID
+  getCustomerAccounts(customerId: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/account/customer/${customerId}`);
   }
 }

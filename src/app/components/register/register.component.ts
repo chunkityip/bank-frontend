@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CustomerService } from '../../services/customer.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -21,15 +22,20 @@ import { MatButtonModule } from '@angular/material/button';
   templateUrl: './register.component.html',
 })
 export class RegisterComponent {
-  fullName: string = '';
-  customerId: string | null = null;
+  customerName: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private customerService: CustomerService, private router: Router) {}
 
   register() {
-    // Mock customer ID generation
-    this.customerId = Math.floor(Math.random() * 1000000).toString();
-    // After registration, redirect to login
-    setTimeout(() => this.router.navigate(['/login']), 5000);
+    this.customerService.registerCustomer(this.customerName).subscribe({
+      next: (response) => {
+        const customerId = response.id; // Assuming the backend returns an object with an 'id' property
+        alert(`Registration successful! Your customer ID is: ${customerId}`);
+        this.router.navigate(['/login']);
+      },
+      error: () => {
+        alert('Registration failed. Please try again.');
+      }
+    });
   }
 }

@@ -1,13 +1,9 @@
 <mat-card>
   <form (ngSubmit)="register()">
     <mat-form-field appearance="fill">
-      <mat-label>Full Name</mat-label>
-      <input matInput [(ngModel)]="fullName" name="fullName" required>
+      <mat-label>Customer Name</mat-label>
+      <input matInput [(ngModel)]="customerName" name="customerName" required>  <!-- Use customerName here -->
     </mat-form-field>
     <button mat-raised-button color="primary" type="submit">Register</button>
   </form>
-  <p *ngIf="customerId">Registration successful! Your customer ID is: {{ customerId }}</p>
 </mat-card>
-
-
-

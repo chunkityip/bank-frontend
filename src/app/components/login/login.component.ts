@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CustomerService } from '../../services/customer.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
@@ -23,13 +24,18 @@ import { MatButtonModule } from '@angular/material/button';
 export class LoginComponent {
   customerId: string = '';
 
-  constructor(private router: Router) {}
+  constructor(private customerService: CustomerService, private router: Router) {}
 
   login() {
-    // Logic for login (e.g., validate customer ID)
-    if (this.customerId) {
-      this.router.navigate(['/dashboard']);
-    }
+    this.customerService.loginCustomer(this.customerId).subscribe({
+      next: (customer) => {
+        localStorage.setItem('customer', JSON.stringify(customer)); // Store customer data in local storage
+        this.router.navigate(['/dashboard']);
+      },
+      error: () => {
+        alert('Login failed. Please check your customer ID.');
+      }
+    });
   }
 }
 
