@@ -24,6 +24,6 @@ export class CustomerService {
 
   // Get all bank accounts associated with the customer ID
   getCustomerAccounts(customerId: string): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/account/customer/${customerId}`);
+    return this.http.get<any>(`${this.apiUrl}/account/customer/${customerId}/accounts`);
   }
 }

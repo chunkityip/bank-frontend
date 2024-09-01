@@ -1,13 +1,14 @@
 <mat-card>
-  <h1>Welcome, {{ customerName }}</h1>
+  <h1>Welcome, {{ customer.name }}</h1>
   <h2>Your Bank Accounts:</h2>
   <mat-list>
-    <mat-list-item *ngFor="let account of bankAccounts">
+    <mat-list-item *ngFor="let account of accounts">
       Account Number: {{ account.number }} - Balance: {{ account.balance | currency }}
     </mat-list-item>
   </mat-list>
   <button mat-raised-button color="primary" routerLink="/create-account">Create Bank Account</button>
   <button mat-raised-button color="accent" routerLink="/transaction">Make a Transaction</button>
 </mat-card>
+
 
 
